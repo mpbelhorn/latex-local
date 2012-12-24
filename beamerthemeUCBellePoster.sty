@@ -1,0 +1,232 @@
+% This style was created by:
+%
+%    Matt Belhorn
+%    Belle Experiment Subgroup
+%    University of Cincinnati
+%    matt.belhorn@gmail.com
+%
+
+\ProvidesPackage{beamerthemeUCBellePoster}
+
+\selectcolormodel{cmyk}
+\mode<presentation>
+
+
+% custom colors
+\definecolor{UC red}{cmyk}{0,0.895,0.759,0.106} % official UC Red
+\definecolor{light yellow}{cmyk}{0.01,0,0.16,0}
+\definecolor{UC black}{cmyk}{0.000,0.114,0.086,0.863} % official UC black
+
+
+% headline colors and fonts
+\setbeamercolor{headline}{fg=UC black,bg=white}
+\setbeamercolor{title in headline}{fg=UC red}
+\setbeamercolor{author in headline}{fg=UC black}
+\setbeamercolor{institute in headline}{fg=UC black}
+\setbeamercolor{logo in headline}{fg=UC black,bg=white}
+\setbeamercolor{separation line}{bg=UC red}
+
+% footline colors and fonts
+\setbeamercolor{footline}{fg=white,bg=UC black}
+\setbeamerfont{footline}{fg=white, size=\normalsize}
+
+% body colors and fonts
+\setbeamercolor*{normal text}{fg=UC black,bg=white}
+
+% block environment
+\setbeamercolor*{block body}{fg=UC black, bg=light yellow}
+\setbeamercolor*{block title}{fg=UC red,bg=light yellow}
+\setbeamerfont{block title}{size=\large}
+
+% example environment
+\setbeamercolor*{example title}{fg=white,bg=uafcolorscheme1}
+\setbeamerfont{example title}{size=\large,series=\bf,bg=uafcolorscheme1,fg=white}
+
+
+%\setbeamercolor*{example body}{fg=white,bg=uafcolorscheme4}
+%\setbeamercolor*{example title}{fg=white,bg=uafcolorscheme1}
+
+
+%  \setbeamercolor{framesubtitle}{fg=ta3orange, bg=ta2gray}
+%  \setbeamercolor{author in head/foot}{fg=tabutter, bg=black}
+%  \setbeamercolor{title in head/foot}{bg=tabutter, fg=black}
+
+
+\setbeamercolor{alerted text}{fg=UC red}
+\setbeamercolor{caption name}{fg=UC black}
+
+%\setbeamercolor{structure}{fg=UC black}
+
+%  \setbeamertemplate{itemize/enumerate body begin}{
+%  }
+%  \setbeamertemplate{itemize/enumerate body end}{
+%  }
+
+\setbeamertemplate{itemize items}[triangle]
+\setbeamertemplate{navigation symbols}{}  % no navigation on a poster
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{block begin}{
+  \vskip5.75ex
+  \begin{beamercolorbox}[leftskip=1cm,colsep*=.75ex]{block title}%
+    \usebeamerfont*{block title}\insertblocktitle
+  \end{beamercolorbox}%
+  {\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body}%
+  \begin{beamercolorbox}[colsep*=.75ex,sep=.75ex,vmode]{block body}%
+    \ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+  }
+  \setbeamertemplate{block end}{
+    \end{beamercolorbox}
+  }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{headline}{  
+  \leavevmode
+
+  \begin{beamercolorbox}[wd=\paperwidth]{headline}
+    \begin{columns}[c]
+      \begin{column}{.02\paperwidth}
+      \end{column}
+      \begin{column}{.175\paperwidth}
+          \includegraphics[height=7cm]{logo_UC}
+      \end{column}
+      \begin{column}{.61\paperwidth}
+        \vskip4ex
+        \begin{center}
+        \usebeamercolor{title in headline}{\color{fg}\textbf{\huge{\inserttitle}}\\[5ex]}
+        \usebeamercolor{author in headline}{\color{fg}\large{\insertauthor}\\[2ex]}
+        \usebeamercolor{institute in headline}{\color{fg}\large{\insertinstitute}\\[2ex]}   
+        \end{center} 
+        \vskip1ex
+      \end{column}
+      \begin{column}{.175\paperwidth}
+        \vskip1cm
+          \includegraphics[height=5.5cm]{logo_Belle}
+          \hspace{15ex}
+          \includegraphics[height=5.5cm]{logo_KEK}
+      \end{column}
+      \begin{column}{.02\paperwidth}
+      \end{column}
+    \end{columns}
+  \end{beamercolorbox}
+  
+  
+  \begin{beamercolorbox}[wd=\paperwidth]{lower separation line head}
+    \rule{0pt}{5pt}
+  \end{beamercolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{footline}{
+  \begin{beamercolorbox}[wd=\paperwidth]{upper separation line foot}
+    \rule{0pt}{5pt}
+  \end{beamercolorbox}
+  \begin{beamercolorbox}[ht=4ex,leftskip=1cm,rightskip=1cm]{footline}%
+    % Bottom line citations or aknowledgements should go here.
+    \vskip1ex
+  \end{beamercolorbox}
+
+  \begin{beamercolorbox}[wd=\paperwidth]{lower separation line foot}
+    \rule{0pt}{5pt}
+  \end{beamercolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Additions by Andy Aschwanden
+% 
+% 09/20: currently, the block environment works not with multicols
+%            so we use pbox instead
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newsavebox{\dummybox}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                pbox                          %%%             
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\fboxrule}{1pt}
+
+\newenvironment{pbox}[3][white]{%
+  %\definecolor{boxcolor}{rgb}{#1}
+  \gdef\@bcolor{#1}
+  \setlength{\fboxsep}{0.005\paperwidth}
+  \centering
+  \begin{lrbox}{\dummybox}%
+    \begin{minipage}{0.92\linewidth}
+      \color{#3}{\textsf{\LARGE #2}}\color{black} \vspace{0.5em}\\ \small}{%
+    \end{minipage}
+  \end{lrbox}
+  \raisebox{-\depth}{\hspace{-0.5em} 
+    \fbox{\colorbox{\@bcolor}{\usebox{\dummybox}}}}
+  \vspace{1.2em} \vfill}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                pbox   no frame              %%%             
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{pboxnf}[3][white]{%
+  %\definecolor{boxcolor}{rgb}{#1}
+  \gdef\@bnfcolor{#1}
+  \setlength{\fboxsep}{0.005\paperwidth}
+  \centering
+  \begin{lrbox}{\dummybox}%
+    \begin{minipage}{0.96\linewidth}
+      \color{#3}{\LARGE #2}\color{black} \vspace{0.5em}\\ \small}{%
+    \end{minipage}
+  \end{lrbox}
+  \raisebox{-\depth}{\hspace{-0.5em} 
+    \colorbox{\@bnfcolor}{\usebox{\dummybox}}}
+  \vspace{1.2em} \vfill}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                pbbox                         %%%             
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{pbbox}[2][white]{%
+  %\definecolor{boxcolor}{rgb}{#1}
+  \gdef\@bbcolor{#1}
+  \setlength{\fboxsep}{0mm}
+  %\centering
+  \begin{lrbox}{\dummybox}%
+    \begin{minipage}{#2}
+      \large}{%
+    \end{minipage}
+  \end{lrbox}
+  \raisebox{-\depth}{\hspace{-.5em} 
+    \fbox{\colorbox{\@bbcolor}{\usebox{\dummybox}}}}
+  \vspace{0.5em} \vfill}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                pbbox   no frame              %%%             
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{pbboxnf}[2][white]{%
+  %\definecolor{boxcolor}{rgb}{#1}
+  \gdef\@bbnfcolor{#1}
+  \setlength{\fboxsep}{4mm}
+  %\centering
+  \begin{lrbox}{\dummybox}%
+    \begin{minipage}{#2}
+      \large}{%
+    \end{minipage}
+  \end{lrbox}
+  \raisebox{-\depth}{\hspace{-0.5em} 
+    \colorbox{\@bbnfcolor}{\usebox{\dummybox}}}
+  \vspace{0.5em} \vfill}
+
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mode<all>
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "poster"
+%%% TeX-PDF-mode: t
+%%% End: 
